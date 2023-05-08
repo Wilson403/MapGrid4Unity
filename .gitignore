@@ -1,0 +1,10 @@
+/WorldSpace2Grid/obj
+/WorldSpace2Grid/Library
+/WorldSpace2Grid/Logs
+/WorldSpace2Grid/UserSettings
+/WorldSpace2Grid/Packages
+/WorldSpace2Grid/Temp
+/WorldSpace2Grid/.vs
+/WorldSpace2Grid/Assembly-CSharp.csproj
+/WorldSpace2Grid/*.csproj
+/WorldSpace2Grid/*.sln
