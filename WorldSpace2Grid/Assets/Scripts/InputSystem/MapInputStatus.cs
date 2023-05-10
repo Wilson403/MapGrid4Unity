@@ -22,6 +22,32 @@ namespace WorldSpace2Grid
         }
 
         /// <summary>
+        /// 触摸开始
+        /// </summary>
+        /// <param name="touchPos"></param>
+        public virtual void TouchStart (Vector2 touchPos) 
+        {
+
+        }
+
+        /// <summary>
+        /// 触摸移动
+        /// </summary>
+        /// <param name="touchPos"></param>
+        public virtual void TouchMove (Vector2 touchPos) 
+        {
+
+        }
+
+        /// <summary>
+        /// 触摸结束
+        /// </summary>
+        public virtual void TouchEnd () 
+        {
+
+        }
+
+        /// <summary>
         /// 多点触摸开始
         /// </summary>
         /// <param name="touchPos1"></param>

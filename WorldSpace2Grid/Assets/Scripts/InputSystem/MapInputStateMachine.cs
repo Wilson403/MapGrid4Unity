@@ -6,6 +6,8 @@ namespace WorldSpace2Grid
     {
         public readonly MapInputIdleStatus mapInputIdleStatus;
         public readonly MapInputScaleStatus mapInputScaleStatus;
+        public readonly MapInputDragSceneStatus mapInputDragSceneStatus;
+        public readonly Transform mapRoot;
 
         /// <summary>
         /// 当前的输入状态
@@ -16,13 +18,13 @@ namespace WorldSpace2Grid
         /// <summary>
         /// 当前的缩放指
         /// </summary>
-        public float CurrentScaleValue 
+        public float CurrentScaleValue
         {
-            get 
+            get
             {
                 return _currentScaleValue;
             }
-            set 
+            set
             {
                 _currentScaleValue = value;
             }
@@ -30,8 +32,10 @@ namespace WorldSpace2Grid
 
         public MapInputStatusMachine ()
         {
+            mapRoot = StartDemo.Ins.cubeContent;
             mapInputIdleStatus = new MapInputIdleStatus (this);
             mapInputScaleStatus = new MapInputScaleStatus (this);
+            mapInputDragSceneStatus = new MapInputDragSceneStatus (this);
             EnterStatus (mapInputIdleStatus);
         }
 
@@ -58,6 +62,7 @@ namespace WorldSpace2Grid
 
             CurrentStatus = newStatus;
             CurrentStatus.EnterStatus ();
+            Debug.Log ($"EnterStatus:[{newStatus}]");
         }
     }
 }

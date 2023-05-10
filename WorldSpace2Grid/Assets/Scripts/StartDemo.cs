@@ -1,24 +1,34 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace WorldSpace2Grid
 {
-    public class StartDemo : MonoBehaviour
+    public class StartDemo : SingletonMonoBehaviour<StartDemo>
     {
+        public Transform cubeContent;
         DebugConsoleRuntime _debugConsoleRuntime;
-        public Image image;
 
         private void Awake ()
         {
             Debug.Log ("已启用控制台，F12可开启");
             _debugConsoleRuntime = new DebugConsoleRuntime ();
+            GenMapItem ();
         }
 
         private void Update ()
         {
             _debugConsoleRuntime.Update ();
             MapMgr.Ins.Update ();
-            image.transform.localScale = new Vector3(MapMgr.Ins.mapInputStatusMachine.CurrentScaleValue, MapMgr.Ins.mapInputStatusMachine.CurrentScaleValue, MapMgr.Ins.mapInputStatusMachine.CurrentScaleValue);
+        }
+
+        void GenMapItem ()
+        {
+            for ( int i = 0 ; i < 10 ; i++ )
+            {
+                for ( int j = 0 ; j < 10 ; j++ )
+                {
+                    MapMgr.Ins.GeneratedMapItem (new UnityEngine.Vector2 (i , j) , cubeContent);
+                }
+            }
         }
 
         private void OnGUI ()

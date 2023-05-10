@@ -9,8 +9,8 @@ namespace WorldSpace2Grid
 
         public MapMgr ()
         {
-            Vector4 x = new Vector4 (-1 , 1 , 0 , 0);
-            Vector4 y = new Vector4 (1 , 1 , 0 , 0);
+            Vector4 x = new Vector4 (-10 , 10 , 0 , 0);
+            Vector4 y = new Vector4 (10 , 10 , 0 , 0);
             Vector4 z = new Vector4 (0 , 0 , 1 , 0);
             Vector4 w = new Vector4 (0 , 0 , 0 , 1);
             _grid2WorldSpaceMatri = new Matrix4x4 (x , y , z , w);
@@ -22,10 +22,10 @@ namespace WorldSpace2Grid
             OnCheckInput ();
         }
 
-        public void GeneratedMapItem (Vector2 v2)
+        public void GeneratedMapItem (Vector2 v2 , Transform parent)
         {
             var res = _grid2WorldSpaceMatri.MultiplyPoint (new Vector4 (v2.x , v2.y , 0 , 1));
-            var cube = GameObject.Instantiate (Resources.Load ("Cube")) as GameObject;
+            var cube = GameObject.Instantiate (Resources.Load ("Cube") , parent) as GameObject;
             cube.transform.position = new Vector3 (res.x , 0 , res.y);
         }
     }
