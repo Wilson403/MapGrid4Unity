@@ -14,15 +14,14 @@ namespace WorldSpace2Grid
 
         public override void TouchStart (Vector2 touchPos)
         {
-            _initTouchPos = machine.mapRoot.parent.worldToLocalMatrix.MultiplyPoint (Camera.main.ScreenToWorldPoint (new Vector3 (touchPos.x , 0 , touchPos.y)));
-            _initScenePos = machine.mapRoot.localPosition;
+            _initTouchPos = touchPos;
+            _initScenePos = Camera.main.transform.parent.position;
         }
 
         public override void TouchMove (Vector2 touchPos)
         {
-            var currentPos = machine.mapRoot.parent.worldToLocalMatrix.MultiplyPoint (Camera.main.ScreenToWorldPoint (new Vector3 (touchPos.x , 0 , touchPos.y)));
-            var finalPos = _initScenePos + currentPos - _initTouchPos;
-            machine.mapRoot.localPosition = new Vector3 (finalPos.x , machine.mapRoot.localPosition.y , finalPos.z);
+            var finalPos = _initScenePos + new Vector3 (touchPos.x , touchPos.y , 0) - _initTouchPos;
+            Camera.main.transform.parent.position = new Vector3 (-finalPos.x , Camera.main.transform.parent.position.y , -finalPos.y);
         }
 
         public override void TouchEnd ()

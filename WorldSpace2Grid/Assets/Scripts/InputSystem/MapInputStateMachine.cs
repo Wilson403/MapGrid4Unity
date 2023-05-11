@@ -7,35 +7,35 @@ namespace WorldSpace2Grid
         public readonly MapInputIdleStatus mapInputIdleStatus;
         public readonly MapInputScaleStatus mapInputScaleStatus;
         public readonly MapInputDragSceneStatus mapInputDragSceneStatus;
-        public readonly Transform mapRoot;
+        public readonly MapInputDragMapItemStatus mapInputDragMapItemStatus;
 
         /// <summary>
         /// 当前的输入状态
         /// </summary>
         public MapInputStatus CurrentStatus { get; private set; }
 
-        private float _currentScaleValue = 1;
+        private float _currentFieldOfView = 60;
         /// <summary>
-        /// 当前的缩放指
+        /// 当前的视野值
         /// </summary>
-        public float CurrentScaleValue
+        public float CurrentFieldOfView
         {
             get
             {
-                return _currentScaleValue;
+                return _currentFieldOfView;
             }
             set
             {
-                _currentScaleValue = value;
+                _currentFieldOfView = value;
             }
         }
 
         public MapInputStatusMachine ()
         {
-            mapRoot = StartDemo.Ins.cubeContent;
             mapInputIdleStatus = new MapInputIdleStatus (this);
             mapInputScaleStatus = new MapInputScaleStatus (this);
             mapInputDragSceneStatus = new MapInputDragSceneStatus (this);
+            mapInputDragMapItemStatus = new MapInputDragMapItemStatus (this);
             EnterStatus (mapInputIdleStatus);
         }
 

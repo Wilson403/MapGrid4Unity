@@ -6,7 +6,7 @@ namespace WorldSpace2Grid
     {
         private Vector2 _initTouchPos1;
         private Vector2 _initTouchPos2;
-        private float _initScale;
+        private float _initFieldOfView;
 
         public MapInputScaleStatus (MapInputStatusMachine machine) : base (machine)
         {
@@ -16,7 +16,7 @@ namespace WorldSpace2Grid
         public override void EnterStatus ()
         {
             base.EnterStatus ();
-            _initScale = machine.CurrentScaleValue;
+            _initFieldOfView = machine.CurrentFieldOfView;
         }
 
         public override void TouchStart (Vector2 touchPos)
@@ -35,8 +35,8 @@ namespace WorldSpace2Grid
         public override void MultiTouchMove (Vector2 touchPos1 , Vector2 touchPos2)
         {
             var scaleNum = ( touchPos1 - touchPos2 ).magnitude / ( _initTouchPos1 - _initTouchPos2 ).magnitude;
-            machine.CurrentScaleValue = scaleNum * _initScale;
-            machine.mapRoot.localScale = new Vector3 (machine.CurrentScaleValue , machine.CurrentScaleValue , machine.CurrentScaleValue);
+            machine.CurrentFieldOfView = scaleNum * _initFieldOfView;
+            Camera.main.fieldOfView = machine.CurrentFieldOfView;
         }
 
         public override void MultiTouchEnd ()
