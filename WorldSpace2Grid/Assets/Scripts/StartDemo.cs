@@ -5,6 +5,7 @@ namespace WorldSpace2Grid
     public class StartDemo : SingletonMonoBehaviour<StartDemo>
     {
         public Transform cubeContent;
+        public Camera standardCamera;
         DebugConsoleRuntime _debugConsoleRuntime;
 
         private void Awake ()

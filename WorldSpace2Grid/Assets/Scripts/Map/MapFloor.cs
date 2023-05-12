@@ -18,7 +18,8 @@ namespace WorldSpace2Grid
                 return;
             }
             Root = GameObject.Instantiate (Resources.Load ("Cube") , parent) as GameObject;
-            Root.transform.position = new Vector3 (worldPos.x , 0 , worldPos.y);
+            Root.name = $"Floor:{gridPos}";
+            Root.transform.position = worldPos;
         }
     }
 }

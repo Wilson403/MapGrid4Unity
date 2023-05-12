@@ -20,6 +20,10 @@ namespace WorldSpace2Grid
 
         public override void TouchMove (Vector2 touchPos)
         {
+            if ( touchPos.x == _initTouchPos.x && touchPos.y == _initTouchPos.y )
+            {
+                return;
+            }
             var finalPos = _initScenePos + new Vector3 (touchPos.x , touchPos.y , 0) - _initTouchPos;
             Camera.main.transform.parent.position = new Vector3 (-finalPos.x , Camera.main.transform.parent.position.y , -finalPos.y);
         }

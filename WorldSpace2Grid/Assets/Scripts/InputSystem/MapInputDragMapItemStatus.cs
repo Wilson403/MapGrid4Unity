@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace WorldSpace2Grid
 {
     public class MapInputDragMapItemStatus : MapInputStatus
@@ -5,6 +7,11 @@ namespace WorldSpace2Grid
         public MapInputDragMapItemStatus (MapInputStatusMachine machine) : base (machine)
         {
 
+        }
+
+        public override void TouchStart (Vector2 touchPos)
+        {
+            
         }
     }
 }

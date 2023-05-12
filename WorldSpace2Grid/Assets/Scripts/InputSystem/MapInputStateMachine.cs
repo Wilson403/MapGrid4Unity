@@ -8,6 +8,9 @@ namespace WorldSpace2Grid
         public readonly MapInputScaleStatus mapInputScaleStatus;
         public readonly MapInputDragSceneStatus mapInputDragSceneStatus;
         public readonly MapInputDragMapItemStatus mapInputDragMapItemStatus;
+        public readonly MapInputFloorCheckStatus mapInputFloorCheckStatus;
+
+        public MapFloor currentFloor;
 
         /// <summary>
         /// 当前的输入状态
@@ -36,6 +39,7 @@ namespace WorldSpace2Grid
             mapInputScaleStatus = new MapInputScaleStatus (this);
             mapInputDragSceneStatus = new MapInputDragSceneStatus (this);
             mapInputDragMapItemStatus = new MapInputDragMapItemStatus (this);
+            mapInputFloorCheckStatus = new MapInputFloorCheckStatus (this);
             EnterStatus (mapInputIdleStatus);
         }
 

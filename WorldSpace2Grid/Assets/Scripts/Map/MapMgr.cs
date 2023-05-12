@@ -8,13 +8,13 @@ namespace WorldSpace2Grid
     {
         public readonly Matrix4x4 grid2WorldSpaceMatri;
         public readonly Matrix4x4 worldSpace2Grid;
-        public List<MapFloor> mapFloors;
+        public readonly List<MapFloor> mapFloors;
 
         public MapMgr ()
         {
-            Vector4 x = new Vector4 (-10 , 10 , 0 , 0);
-            Vector4 y = new Vector4 (10 , 10 , 0 , 0);
-            Vector4 z = new Vector4 (0 , 0 , 1 , 0);
+            Vector4 x = new Vector4 (-10 , 0 , 10 , 0);
+            Vector4 y = new Vector4 (0 , 1 , 0 , 0);
+            Vector4 z = new Vector4 (10 , 0 , 10 , 0);
             Vector4 w = new Vector4 (0 , 0 , 0 , 1);
             grid2WorldSpaceMatri = new Matrix4x4 (x , y , z , w);
             worldSpace2Grid = grid2WorldSpaceMatri.inverse;
