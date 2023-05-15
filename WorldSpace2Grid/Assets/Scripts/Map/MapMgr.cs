@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace WorldSpace2Grid
+namespace MapGrid4Unity
 {
     public partial class MapMgr : SafeSingleton<MapMgr>
     {
@@ -26,23 +26,46 @@ namespace WorldSpace2Grid
             OnCheckInput ();
         }
 
+        /// <summary>
+        /// Æ¥ÅäµØ¿é
+        /// </summary>
+        /// <param name="touchPos"></param>
+        /// <returns></returns>
+        public MapFloor MatchMapFloor (Vector2 touchPos)
+        {
+            Vector3 worldPos = Camera.main.ScreenToWorldPoint (new Vector3 (touchPos.x , touchPos.y , Camera.main.transform.parent.position.y));
+            worldPos.y = 0;
+            MapFloor clickFloor = null;
+            foreach ( MapFloor floor in mapFloors )
+            {
+                float length = Vector3.Distance (floor.worldPos , worldPos);
+                if ( length <= 5 )
+                {
+                    clickFloor = floor;
+                    break;
+                }
+            }
+            return clickFloor;
+        }
+
         public void GeneratedFloor ()
         {
             for ( int i = 0 ; i < 10 ; i++ )
             {
                 for ( int j = 0 ; j < 10 ; j++ )
                 {
-                    mapFloors.Add (new MapFloor (new Vector2 (i , j)));
+                    mapFloors.Add (new MapFloor (new Vector3 (i , 0 , j)));
                 }
             }
-            StartDemo.Ins.StartCoroutine (DelayCreateFloor ());
+            MapRuntime.Ins.StartCoroutine (DelayCreateFloor ());
         }
 
         IEnumerator DelayCreateFloor ()
         {
             for ( int i = 0 ; i < mapFloors.Count ; i++ )
             {
-                mapFloors [i].CreateInstance (StartDemo.Ins.cubeContent);
+                mapFloors [i].CreateInstance (MapRuntime.Ins.content);
+                mapFloors [i].Root.name = $"Floor:[{mapFloors [i].gridPos}]";
                 yield return new WaitForEndOfFrame ();
             }
         }

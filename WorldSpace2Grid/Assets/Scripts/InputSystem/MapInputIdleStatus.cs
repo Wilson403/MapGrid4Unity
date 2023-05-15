@@ -1,8 +1,6 @@
-using System;
-using System.Net;
 using UnityEngine;
 
-namespace WorldSpace2Grid
+namespace MapGrid4Unity
 {
     public class MapInputIdleStatus : MapInputStatus
     {
@@ -13,26 +11,14 @@ namespace WorldSpace2Grid
 
         public override void TouchStart (Vector2 touchPos)
         {
-            Vector3 mousePos = new Vector3 (touchPos.x , touchPos.y , Camera.main.transform.position.y);
-            Vector3 worldPos = Camera.main.ScreenToWorldPoint (mousePos);
-            worldPos = new Vector3 (worldPos.x , 0 , worldPos.z);
-
-            MapFloor clickFloor = null;
-            foreach ( MapFloor floor in MapMgr.Ins.mapFloors )
-            {
-                float length = Vector3.Distance (floor.worldPos , worldPos);
-                if ( length <= 5 )
-                {
-                    clickFloor = floor;
-                    break;
-                }
-            }
+            var clickFloor = MapMgr.Ins.MatchMapFloor (touchPos);
 
             //如果检测到了地块，进入地块检查
             if ( clickFloor != null )
             {
                 machine.currentFloor = clickFloor;
                 machine.EnterStatus (machine.mapInputFloorCheckStatus);
+                machine.CurrentStatus.TouchStart (touchPos);
                 return;
             }
 

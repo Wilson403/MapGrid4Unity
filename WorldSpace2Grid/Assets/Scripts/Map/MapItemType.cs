@@ -1,4 +1,4 @@
-namespace WorldSpace2Grid 
+namespace MapGrid4Unity 
 {
     public enum MapItemType
     {

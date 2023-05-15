@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace WorldSpace2Grid
+namespace MapGrid4Unity
 {
     public abstract class SingletonMonoBehaviour<T> : MonoBehaviour where T : Component
     {

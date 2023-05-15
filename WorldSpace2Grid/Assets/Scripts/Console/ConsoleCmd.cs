@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WorldSpace2Grid
+namespace MapGrid4Unity
 {
     [AttributeUsage (AttributeTargets.Method)]
     public class ConsoleCmd : Attribute

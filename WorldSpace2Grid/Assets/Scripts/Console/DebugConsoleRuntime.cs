@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Threading;
 using UnityEngine;
 
-namespace WorldSpace2Grid
+namespace MapGrid4Unity
 {
     public class DebugConsoleRuntime
     {

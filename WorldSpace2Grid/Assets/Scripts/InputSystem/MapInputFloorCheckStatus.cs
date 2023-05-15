@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace WorldSpace2Grid
+namespace MapGrid4Unity
 {
     public class MapInputFloorCheckStatus : MapInputStatus
     {
@@ -9,12 +9,22 @@ namespace WorldSpace2Grid
 
         }
 
-        public override void EnterStatus ()
+        public override void TouchStart (Vector2 touchPos)
         {
-            if ( machine.currentFloor != null ) 
+            if ( machine.currentFloor != null )
             {
-                Debug.LogWarning ($"{machine.currentFloor.Root.name}");
+                if ( machine.currentFloor.ChildItem == null )
+                {
+                    machine.EnterStatus (machine.mapInputDragSceneStatus);
+                    machine.CurrentStatus.TouchStart (touchPos);
+                }
+                else
+                {
+                    machine.EnterStatus (machine.mapInputDragMapItemStatus);
+                }
+                return;
             }
+            machine.EnterStatus (machine.mapInputIdleStatus);
         }
     }
 }

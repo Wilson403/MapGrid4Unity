@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace WorldSpace2Grid
+namespace MapGrid4Unity
 {
     public partial class MapMgr : SafeSingleton<MapMgr>
     {
