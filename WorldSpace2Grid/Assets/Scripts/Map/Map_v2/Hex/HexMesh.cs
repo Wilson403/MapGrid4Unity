@@ -39,7 +39,7 @@ namespace MapGrid4Unity
 
 		void Triangulate (HexCell cell)
 		{
-			Vector3 center = cell.pos;
+			Vector3 center = cell.worldPos;
 			for ( int i = 0 ; i < 6 ; i++ )
 			{
 				AddTriangle (

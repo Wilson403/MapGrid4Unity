@@ -4,11 +4,13 @@ namespace MapGrid4Unity
 {
     public class HexCell
     {
-        public readonly Vector3 pos;
+        public readonly Vector3 worldPos;
+        public readonly HexCoordinates hexCoordinates;
 
-        public HexCell (Vector3 pos)
+        public HexCell (HexCoordinates hexCoordinates)
         {
-            this.pos = pos;
+            this.worldPos = new Vector3 (( hexCoordinates.X + hexCoordinates.Z * 0.5f - hexCoordinates.Z / 2 ) * HexMetrics.innerRadius * 2 , 0 , hexCoordinates.Z * HexMetrics.outerRadius * 1.5f);
+            this.hexCoordinates = HexCoordinates.FromOffsetCoordinates (hexCoordinates.X , hexCoordinates.Z);
         }
 
         /// <summary>
@@ -18,8 +20,8 @@ namespace MapGrid4Unity
         {
             var obj = GameObject.Instantiate (Resources.Load<GameObject> ("HexCell"));
             obj.transform.SetParent (MapRuntime.Ins.content , false);
-            obj.transform.localPosition = pos;
-            obj.GetComponentInChildren<UnityEngine.UI.Text> ().text = $"({pos.x:F1},{pos.z:F1})";
+            obj.transform.localPosition = worldPos;
+            obj.GetComponentInChildren<UnityEngine.UI.Text> ().text = hexCoordinates.ToString ();
         }
     }
 }

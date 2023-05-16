@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace MapGrid4Unity
 {
 	public class HexGrid : IMapGrid
@@ -15,8 +13,7 @@ namespace MapGrid4Unity
 			{
 				for ( int x = 0 ; x < width ; x++ )
 				{
-					Vector3 position = new Vector3 (( x + z * 0.5f - z / 2 ) * HexMetrics.innerRadius * 2 , 0 , z * HexMetrics.outerRadius * 1.5f);
-					_cells [i] = new HexCell (position);
+					_cells [i] = new HexCell (new HexCoordinates (x , z));
 #if UNITY_EDITOR
 					_cells [i].CreateDebugObj ();
 #endif
