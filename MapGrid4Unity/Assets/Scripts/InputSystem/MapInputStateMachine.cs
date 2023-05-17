@@ -7,8 +7,6 @@ namespace MapGrid4Unity
         public readonly MapInputIdleStatus mapInputIdleStatus;
         public readonly MapInputScaleStatus mapInputScaleStatus;
         public readonly MapInputDragSceneStatus mapInputDragSceneStatus;
-        public readonly MapInputDragMapItemStatus mapInputDragMapItemStatus;
-        public readonly MapInputFloorCheckStatus mapInputFloorCheckStatus;
 
         /// <summary>
         /// 当前的输入状态
@@ -36,8 +34,6 @@ namespace MapGrid4Unity
             mapInputIdleStatus = new MapInputIdleStatus (this);
             mapInputScaleStatus = new MapInputScaleStatus (this);
             mapInputDragSceneStatus = new MapInputDragSceneStatus (this);
-            mapInputDragMapItemStatus = new MapInputDragMapItemStatus (this);
-            mapInputFloorCheckStatus = new MapInputFloorCheckStatus (this);
             EnterStatus (mapInputIdleStatus);
         }
 

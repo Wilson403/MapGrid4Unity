@@ -24,8 +24,10 @@ namespace MapGrid4Unity
             {
                 return;
             }
-            var finalPos = _initScenePos + new Vector3 (touchPos.x , touchPos.y , 0) - _initTouchPos;
-            Camera.main.transform.parent.position = new Vector3 (-finalPos.x , Camera.main.transform.parent.position.y , -finalPos.y);
+
+            var offset = new Vector3 (touchPos.x , 0 , touchPos.y) - new Vector3 (_initTouchPos.x , 0 , _initTouchPos.y);
+            var finalPos = _initScenePos - offset;
+            Camera.main.transform.parent.position = new Vector3 (finalPos.x , Camera.main.transform.parent.position.y , finalPos.z);
         }
 
         public override void TouchEnd ()
