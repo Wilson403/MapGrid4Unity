@@ -11,14 +11,14 @@ namespace MapGrid4Unity
 
         public override void TouchStart (Vector2 touchPos)
         {
-            var clickFloor = MapMgr.Ins.MatchMapFloor (touchPos);
-
-            //如果检测到了地块，进入地块检查
-            if ( clickFloor != null )
+            Ray inputRay = Camera.main.ScreenPointToRay (touchPos);
+            RaycastHit hit;
+            if ( Physics.Raycast (inputRay , out hit) )
             {
-                machine.currentFloor = clickFloor;
-                machine.EnterStatus (machine.mapInputFloorCheckStatus);
-                machine.CurrentStatus.TouchStart (touchPos);
+                var hexCoordinates = HexCoordinates.FromPostion (hit.point);
+                var hexCell = MapMgr.Ins.HexGrid.GetHexCell (hexCoordinates);
+                hexCell.color = new Color (0.5f , 1 , 0 , 1);
+                MapMgr.Ins.HexGrid.ReTriangulate ();
                 return;
             }
 

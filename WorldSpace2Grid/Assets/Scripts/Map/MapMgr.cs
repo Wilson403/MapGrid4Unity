@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace MapGrid4Unity
@@ -8,7 +6,7 @@ namespace MapGrid4Unity
     {
         public readonly Matrix4x4 grid2WorldSpaceMatri;
         public readonly Matrix4x4 worldSpace2Grid;
-        public readonly List<MapFloor> mapFloors;
+        public HexGrid HexGrid { get; private set; }
 
         public MapMgr ()
         {
@@ -18,7 +16,6 @@ namespace MapGrid4Unity
             Vector4 w = new Vector4 (0 , 0 , 0 , 1);
             grid2WorldSpaceMatri = new Matrix4x4 (x , y , z , w);
             worldSpace2Grid = grid2WorldSpaceMatri.inverse;
-            mapFloors = new List<MapFloor> (100);
         }
 
         public void Update ()
@@ -26,48 +23,9 @@ namespace MapGrid4Unity
             OnCheckInput ();
         }
 
-        /// <summary>
-        /// Æ¥ÅäµØ¿é
-        /// </summary>
-        /// <param name="touchPos"></param>
-        /// <returns></returns>
-        public MapFloor MatchMapFloor (Vector2 touchPos)
+        public void CreateHexGrid () 
         {
-            Vector3 worldPos = Camera.main.ScreenToWorldPoint (new Vector3 (touchPos.x , touchPos.y , Camera.main.transform.parent.position.y));
-            worldPos.y = 0;
-            MapFloor clickFloor = null;
-            foreach ( MapFloor floor in mapFloors )
-            {
-                float length = Vector3.Distance (floor.worldPos , worldPos);
-                if ( length <= 5 )
-                {
-                    clickFloor = floor;
-                    break;
-                }
-            }
-            return clickFloor;
-        }
-
-        public void GeneratedFloor ()
-        {
-            for ( int i = 0 ; i < 10 ; i++ )
-            {
-                for ( int j = 0 ; j < 10 ; j++ )
-                {
-                    mapFloors.Add (new MapFloor (new Vector3 (i , 0 , j)));
-                }
-            }
-            MapRuntime.Ins.StartCoroutine (DelayCreateFloor ());
-        }
-
-        IEnumerator DelayCreateFloor ()
-        {
-            for ( int i = 0 ; i < mapFloors.Count ; i++ )
-            {
-                mapFloors [i].CreateInstance (MapRuntime.Ins.content);
-                mapFloors [i].Root.name = $"Floor:[{mapFloors [i].gridPos}]";
-                yield return new WaitForEndOfFrame ();
-            }
+            HexGrid = new HexGrid ();
         }
     }
 }

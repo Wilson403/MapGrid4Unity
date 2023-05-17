@@ -10,8 +10,6 @@ namespace MapGrid4Unity
         public readonly MapInputDragMapItemStatus mapInputDragMapItemStatus;
         public readonly MapInputFloorCheckStatus mapInputFloorCheckStatus;
 
-        public MapFloor currentFloor;
-
         /// <summary>
         /// 当前的输入状态
         /// </summary>

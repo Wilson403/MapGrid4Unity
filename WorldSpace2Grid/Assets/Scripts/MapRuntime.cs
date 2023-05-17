@@ -2,32 +2,19 @@ using UnityEngine;
 
 namespace MapGrid4Unity
 {
-    public class MapRuntime : SingletonMonoBehaviour<MapRuntime>
+    /// <summary>
+    /// 生命周期入口
+    /// </summary>
+    public class MapRuntime : MonoBehaviour
     {
-        public Transform content;
-        public Camera standardCamera;
-        public HexMesh hexMesh;
-        DebugConsoleRuntime _debugConsoleRuntime;
-
-        private void Awake ()
+        private void Start ()
         {
-            Debug.Log ("已启用控制台，F12可开启");
-            _debugConsoleRuntime = new DebugConsoleRuntime ();
-
-            new HexGrid ();
-
-            //MapMgr.Ins.GeneratedFloor ();
+            MapMgr.Ins.CreateHexGrid ();
         }
 
         private void Update ()
         {
-            _debugConsoleRuntime.Update ();
-            //MapMgr.Ins.Update ();
-        }
-
-        private void OnGUI ()
-        {
-            _debugConsoleRuntime.OnGUI ();
+            MapMgr.Ins.Update ();
         }
     }
 }
