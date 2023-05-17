@@ -8,3 +8,13 @@
 /WorldSpace2Grid/Assembly-CSharp.csproj
 /WorldSpace2Grid/*.csproj
 /WorldSpace2Grid/*.sln
+/MapGrid4Unity/.vs
+/MapGrid4Unity/Library
+/MapGrid4Unity/Logs
+/MapGrid4Unity/obj
+/MapGrid4Unity/Packages
+/MapGrid4Unity/Temp
+/MapGrid4Unity/UserSettings
+/MapGrid4Unity/*.csproj
+/MapGrid4Unity/*.sln
+/MapGrid4Unity/.vsconfig
