@@ -44,28 +44,27 @@ namespace MapGrid4Unity
 		public void Triangulate (HexCell cell)
 		{
 			Vector3 center = cell.worldPos;
-			for ( int i = 0 ; i < 6 ; i++ )
+			for ( HexDirection i = HexDirection.NE ; i <= HexDirection.NW ; i++ )
 			{
-				AddTriangle (
-					center ,
-					center + HexMetrics.corners [i] ,
-					center + HexMetrics.corners [i + 1]
-				);
+				AddTriangle (center , center + HexMetrics.corners [( int ) i] , center + HexMetrics.corners [( int ) i + 1]);
 				AddTriangleColor (cell.color);
 			}
 		}
 
+		//添加三角形
 		void AddTriangle (Vector3 v1 , Vector3 v2 , Vector3 v3)
 		{
 			int vertexIndex = vertices.Count;
 			vertices.Add (v1);
 			vertices.Add (v2);
 			vertices.Add (v3);
+
 			triangles.Add (vertexIndex);
 			triangles.Add (vertexIndex + 1);
 			triangles.Add (vertexIndex + 2);
 		}
 
+		//存储每个顶点的颜色
 		void AddTriangleColor (Color color)
 		{
 			colors.Add (color);

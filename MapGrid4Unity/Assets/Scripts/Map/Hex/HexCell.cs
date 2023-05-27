@@ -4,9 +4,22 @@ namespace MapGrid4Unity
 {
     public class HexCell
     {
-        public readonly Vector3 worldPos;
+        public Vector3 worldPos;
         public readonly HexCoordinates hexCoordinates;
         public Color color;
+
+        private int _elevation;
+        public int Elevation
+        {
+            get
+            {
+                return _elevation;
+            }
+            set
+            {
+                worldPos.y += value;
+            }
+        }
 
         public HexCell (HexCoordinates hexCoordinates)
         {

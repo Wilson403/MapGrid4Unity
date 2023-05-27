@@ -16,7 +16,10 @@ namespace MapGrid4Unity
 
 		public static Vector3 HexCoordinates2WorldPos (HexCoordinates hexCoordinates)
 		{
-			return new Vector3 (( hexCoordinates.X + hexCoordinates.Z * 0.5f - hexCoordinates.Z / 2 ) * HexMetrics.innerRadius * 2 , 0 , hexCoordinates.Z * HexMetrics.outerRadius * 1.5f);
+			var x = hexCoordinates.X + hexCoordinates.Z * 0.5f - hexCoordinates.Z / 2; //对x变量做偏移
+			var y = 0;
+			var z = hexCoordinates.Z;
+			return HexMetrics.hexCoords2WorldPosMatrix.MultiplyPoint (new Vector3 (x , y , z));
 		}
 
 		public static HexCoordinates FromOffsetCoordinates (HexCoordinates hexCoordinates)

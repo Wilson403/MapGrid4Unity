@@ -9,6 +9,7 @@ namespace MapGrid4Unity
 		private readonly HexCell [] _cells;
 		public readonly HexMesh hexMesh;
 
+
 		public HexGrid ()
 		{
 			_cells = new HexCell [height * width];
@@ -17,6 +18,7 @@ namespace MapGrid4Unity
 				for ( int x = 0 ; x < width ; x++ )
 				{
 					_cells [i] = new HexCell (new HexCoordinates (x , z));
+					_cells [i].Elevation = Random.Range (0 , 10);
 #if UNITY_EDITOR
 					_cells [i].CreateDebugObj ();
 #endif
@@ -31,7 +33,7 @@ namespace MapGrid4Unity
 			hexMeshObj.AddComponent<MeshFilter> ();
 			hexMesh = hexMeshObj.AddComponent<HexMesh> ();
 
-			ReTriangulate ();
+			Refresh ();
 		}
 
 		public HexCell GetHexCell (HexCoordinates hexCoordinates)
@@ -44,9 +46,24 @@ namespace MapGrid4Unity
 			return _cells [index];
 		}
 
-		public void ReTriangulate ()
+		public void Refresh ()
 		{
 			hexMesh.Triangulate (_cells);
+		}
+
+		/// <summary>
+		/// …Ë÷√∫£∞Œ
+		/// </summary>
+		/// <param name="hexCoordinates"></param>
+		/// <param name="elevation"></param>
+		public void SetHexCellElevation (HexCoordinates hexCoordinates , int elevation)
+		{
+			HexCell hexCell = GetHexCell (hexCoordinates);
+			if ( hexCell != null )
+			{
+				hexCell.Elevation = elevation;
+				Refresh ();
+			}
 		}
 	}
 }

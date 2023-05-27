@@ -18,7 +18,7 @@ namespace MapGrid4Unity
                 var hexCoordinates = HexCoordinates.FromPostion (hit.point);
                 var hexCell = MapMgr.Ins.HexGrid.GetHexCell (hexCoordinates);
                 hexCell.color = new Color (0.5f , 1 , 0 , 1);
-                MapMgr.Ins.HexGrid.ReTriangulate ();
+                MapMgr.Ins.HexGrid.Refresh ();
                 return;
             }
 
